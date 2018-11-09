@@ -1,0 +1,40 @@
+
+<body>
+	<div class="d-flex p-2 bd-highlight">
+		<form class="form-inline my-2 my-lg-0" action="/" method="POST">
+			<input class="form-control mr-sm-2" type="search" name="movie_name" placeholder="Rechercher" aria-label="Search">
+			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Rechercher</button>
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		</form>
+	</div>
+	<% if @movie_result == nil%>
+		<h3> Rechercher un film </h3>
+	<% else %>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Titre</th>
+					<th scope="col">Date de sortie</th>
+					<th scope="col">Réalisateur</th>
+					<th scope="col"> </th>
+				</tr>
+			</thead>
+			<tbody>
+				<div>
+					<% @movie_id = 0 %>
+					<% while @movie_result[@movie_id] %>
+						<tr>
+							<th scope="row"><%= @movie_id + 1 %></th>
+							<td><%= @movie_result[@movie_id][0] %></td>
+							<td><%= @movie_result[@movie_id][1] %></td>
+							<td><%= @movie_result[@movie_id][2] %></td>
+							<td><img src="<%= @movie_result[@movie_id][3] %>" class="rounded float-left"></td>
+						</tr>
+						<% @movie_id += 1 %>
+					<% end %>
+				</div>
+			</tbody>
+		</table>
+	<% end %>
+</body>
